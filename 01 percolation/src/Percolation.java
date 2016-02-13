@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
 public class Percolation {
     private WeightedQuickUnionUF uf, uf1;
     private boolean[][] sites;
@@ -5,7 +7,7 @@ public class Percolation {
 
     public Percolation(int N) {
         if (N <= 0) {
-            throw new java.lang.IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
 
         this.N = N;
@@ -22,7 +24,7 @@ public class Percolation {
 
     public void open(int i, int j) {
         if (i < 1 || i > N || j < 1 || j > N) {
-            throw new java.lang.IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException();
         }
 
         this.sites[i - 1][j - 1] = true;

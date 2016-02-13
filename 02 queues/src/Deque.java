@@ -1,5 +1,6 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Deque<Item> implements Iterable<Item> {
     private int N;
@@ -157,18 +158,18 @@ public class Deque<Item> implements Iterable<Item> {
         q.addFirst(3);
         q.addFirst(2);
         q.addFirst(1);
-        if (q.removeLast() != 3) throw new AssertionError();
-        if (q.removeLast() != 2) throw new AssertionError();
-        if (q.removeLast() != 1) throw new AssertionError();
+        assert q.removeLast() == 3;
+        assert q.removeLast() == 2;
+        assert q.removeLast() == 1;
 
         StdOut.println("test 3 passed");
 
         q.addLast(1);
         q.addLast(2);
         q.addLast(3);
-        if (q.removeFirst() != 1) throw new AssertionError();
-        if (q.removeFirst() != 2) throw new AssertionError();
-        if (q.removeFirst() != 3) throw new AssertionError();
+        assert q.removeFirst() == 1;
+        assert q.removeFirst() == 2;
+        assert q.removeFirst() == 3;
 
         StdOut.println("test 4 passed");
 
@@ -179,28 +180,28 @@ public class Deque<Item> implements Iterable<Item> {
         q.addLast(5);
 
         Iterator<Integer> it = q.iterator();
-        if (it.next() != 1) throw new AssertionError();
-        if (it.next() != 2) throw new AssertionError();
-        if (it.next() != 3) throw new AssertionError();
-        if (it.next() != 4) throw new AssertionError();
-        if (it.next() != 5) throw new AssertionError();
+        assert it.next() == 1;
+        assert it.next() == 2;
+        assert it.next() == 3;
+        assert it.next() == 4;
+        assert it.next() == 5;
         try {
             it.next();
-            throw new AssertionError();
+            assert false;
         } catch (NoSuchElementException e) {
             StdOut.println("test 5 passed");
         }
 
         try {
             q.addFirst(null);
-            throw new AssertionError();
+            assert false;
         } catch (NullPointerException e) {
             StdOut.println("test 6 passed");
         }
 
         try {
             q.addLast(null);
-            throw new AssertionError();
+            assert false;
         } catch (NullPointerException e) {
             StdOut.println("test 7 passed");
         }

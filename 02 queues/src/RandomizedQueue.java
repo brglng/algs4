@@ -1,7 +1,11 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
+    private static final int MIN_CAPACITY = 8;
+
     private Item[] items;
     private int capacity;
     private int N;
@@ -9,7 +13,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int tail;
 
     public RandomizedQueue() {
-        capacity = 256;
+        capacity = MIN_CAPACITY;
         items = (Item[]) new Object[capacity];
         N = 0;
         head = 0;
@@ -87,15 +91,16 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException("Randomized Queue underflow");
         }
-        int n = StdRandom.uniform(N);
 
-        Item item = at(n);
+        int indexToDequeue = StdRandom.uniform(N);
+        Item item = at(indexToDequeue);
 
-        for (int i = n; i < N - 1; ++i) {
-            int reali = head + i;
-            if (reali >= capacity)
-                reali -= capacity;
-            items[reali] = at(i + 1);
+        if (indexToDequeue < N - 1) {
+            int realIndexToDequeue = indexToDequeue + head;
+            if (realIndexToDequeue >= capacity) {
+                realIndexToDequeue -= capacity;
+            }
+            items[realIndexToDequeue] = items[tail - 1];
         }
 
         tail--;
@@ -105,7 +110,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         N--;
 
-        if (N < capacity / 4 && capacity > 8) {
+        if (N < capacity / 4 && capacity > MIN_CAPACITY) {
             shrink();
         }
 

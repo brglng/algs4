@@ -1,3 +1,7 @@
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+
 public class PercolationStats {
     private double[] fractions;
 
@@ -43,6 +47,8 @@ public class PercolationStats {
     }
 
     public static void main(String[] args) {
+        assert args.length == 2;
+
         int N = Integer.parseInt(args[0]);
         int T = Integer.parseInt(args[1]);
 
